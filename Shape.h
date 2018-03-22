@@ -4,7 +4,7 @@
 
 using namespace std;
 
-char panel[500][500];
+char panel[GRID_WIDTH][GRID_HEIGHT];
 
 class Shape{
 protected:

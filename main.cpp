@@ -3,6 +3,7 @@
 #include <fstream>
 #include "globalValues.h"
 #include "Shape.h"
+#include "CommandFunctions.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ int main(){
             table_command[i] = "";
         }
         length = 0;
+        cout << "write <help> to read manual" <<endl;
         cout << "$>";
         getline (cin,command);
 
@@ -125,12 +127,13 @@ int main(){
         }
         else if(table_command[0] == "draw"){
             if(length == 1){
+                cout<<FILE_NAME<<endl;
                 myfile.open (FILE_NAME ,ios::out);
                 for (it = all_shape.begin(); it != all_shape.end(); ++it){
                     (*it)->draw();
                 }
-                for(int i = 0; i < 1500; i++){
-                    for(int j = 0; j < 1500; j++){
+                for(int i = 0; i < GRID_WIDTH; i++){
+                    for(int j = 0; j < GRID_HEIGHT; j++){
                         myfile << panel[i][j];
                     }
                     myfile << endl;
@@ -145,21 +148,25 @@ int main(){
         else if(table_command[0] == "areas"){
             if(length == 1){
                 for (it = all_shape.begin(); it != all_shape.end(); ++it){
-                    cout<<(*it)->get_name()<<": "<<(*it)->area()<<endl;;
+                    cout<<(*it)->get_name()<<": "<<(*it)->area()<<endl;
                 }
             }
             else{
                 cout<<"this command is wrong"<<endl;
             }
         }
+        else if(table_command[0] == "help"){
+            showHelp();
+        }
         else if(table_command[0] == "exit"){
             break;
         }
         else{
+            cout<<"this command is wrong"<<endl;
         }
-        for (it = all_shape.begin(); it != all_shape.end(); ++it){
-            cout<<(*it)->get_name()<<"-->";
-            (*it)->print();
-        }
+    }
+    for (it = all_shape.begin(); it != all_shape.end(); ++it){
+        cout<<(*it)->get_name()<<"-->";
+        (*it)->print();
     }
 }
