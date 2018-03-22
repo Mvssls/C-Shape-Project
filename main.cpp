@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include "globalValues.h"
 #include "Shape.h"
 
 using namespace std;
@@ -24,8 +25,8 @@ int main(){
     vector<Shape*>::iterator it;
     ofstream myfile;
 
-    for(int i = 0; i < 500; i++){
-        for(int j = 0; j < 500; j++){
+    for(int i = 0; i < GRID_WIDTH; i++){
+        for(int j = 0; j < GRID_HEIGHT; j++){
             panel[i][j] = ' ';
         }
     }
@@ -124,7 +125,7 @@ int main(){
         }
         else if(table_command[0] == "draw"){
             if(length == 1){
-                myfile.open ("test1.txt",ios::out);
+                myfile.open (FILE_NAME ,ios::out);
                 for (it = all_shape.begin(); it != all_shape.end(); ++it){
                     (*it)->draw();
                 }
